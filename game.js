@@ -3,6 +3,13 @@
  * A simple game where you take care of a virtual dog
  */
 
+// Game constants
+const MAX_NAME_LENGTH = 20;
+const MAX_DECAY = 50;
+const DECAY_RATE = 2;
+const GAME_LOOP_INTERVAL = 5000;
+const MESSAGE_DISPLAY_TIME = 3000;
+
 class VirtualDog {
     constructor() {
         // Dog stats (0-100)
@@ -15,6 +22,10 @@ class VirtualDog {
         this.isSleeping = false;
         this.isEating = false;
         this.isPlaying = false;
+        
+        // Timer references
+        this.gameLoopIntervalId = null;
+        this.messageTimeoutId = null;
         
         // DOM elements
         this.dogElement = document.getElementById('dog');
@@ -175,7 +186,7 @@ class VirtualDog {
     renameDog() {
         const newName = prompt('Enter a new name for your dog:', this.name);
         if (newName && newName.trim()) {
-            this.name = newName.trim().substring(0, 20); // Limit to 20 characters
+            this.name = newName.trim().substring(0, MAX_NAME_LENGTH);
             this.dogNameElement.textContent = this.name;
             this.showMessage(`Your dog is now called ${this.name}! 🎉`);
             this.saveGame();
@@ -229,17 +240,23 @@ class VirtualDog {
     showMessage(message) {
         this.statusMessage.textContent = message;
         
-        // Clear message after 3 seconds
-        setTimeout(() => {
+        // Clear previous timeout if exists
+        if (this.messageTimeoutId) {
+            clearTimeout(this.messageTimeoutId);
+        }
+        
+        // Clear message after MESSAGE_DISPLAY_TIME
+        this.messageTimeoutId = setTimeout(() => {
             if (this.statusMessage.textContent === message) {
                 this.statusMessage.textContent = '';
             }
-        }, 3000);
+            this.messageTimeoutId = null;
+        }, MESSAGE_DISPLAY_TIME);
     }
     
     startGameLoop() {
-        // Stats decrease over time (every 5 seconds)
-        setInterval(() => {
+        // Stats decrease over time
+        this.gameLoopIntervalId = setInterval(() => {
             if (this.isSleeping) {
                 // Recover energy while sleeping
                 this.energy = Math.min(100, this.energy + 5);
@@ -255,7 +272,18 @@ class VirtualDog {
             this.updateUI();
             this.checkDogStatus();
             this.saveGame();
-        }, 5000);
+        }, GAME_LOOP_INTERVAL);
+    }
+    
+    stopGameLoop() {
+        if (this.gameLoopIntervalId) {
+            clearInterval(this.gameLoopIntervalId);
+            this.gameLoopIntervalId = null;
+        }
+        if (this.messageTimeoutId) {
+            clearTimeout(this.messageTimeoutId);
+            this.messageTimeoutId = null;
+        }
     }
     
     checkDogStatus() {
@@ -293,8 +321,8 @@ class VirtualDog {
                 const timePassed = Date.now() - gameState.lastSaved;
                 const minutesPassed = timePassed / (1000 * 60);
                 
-                // Apply stat decay based on time passed (max 50% decay)
-                const decay = Math.min(50, minutesPassed * 2);
+                // Apply stat decay based on time passed
+                const decay = Math.min(MAX_DECAY, minutesPassed * DECAY_RATE);
                 
                 this.hunger = Math.max(0, gameState.hunger - decay);
                 this.happiness = Math.max(0, gameState.happiness - decay);
