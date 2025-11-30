@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Dog Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="game-container">
+        <h1>🐕 Virtual Dog Game</h1>
+        
+        <div class="dog-name-section">
+            <span id="dog-name">Buddy</span>
+            <button id="rename-btn" class="small-btn">✏️</button>
+        </div>
+
+        <div class="dog-display">
+            <div id="dog" class="dog">
+                <div class="dog-body">
+                    <div class="dog-ear left"></div>
+                    <div class="dog-ear right"></div>
+                    <div class="dog-head">
+                        <div class="dog-eye left"></div>
+                        <div class="dog-eye right"></div>
+                        <div class="dog-nose"></div>
+                        <div class="dog-tongue" id="dog-tongue"></div>
+                    </div>
+                    <div class="dog-torso"></div>
+                    <div class="dog-tail" id="dog-tail"></div>
+                    <div class="dog-legs">
+                        <div class="dog-leg front-left"></div>
+                        <div class="dog-leg front-right"></div>
+                        <div class="dog-leg back-left"></div>
+                        <div class="dog-leg back-right"></div>
+                    </div>
+                </div>
+            </div>
+            <div id="status-message" class="status-message"></div>
+        </div>
+
+        <div class="stats-container">
+            <div class="stat">
+                <span class="stat-label">🍖 Hunger</span>
+                <div class="stat-bar">
+                    <div id="hunger-bar" class="stat-fill hunger"></div>
+                </div>
+                <span id="hunger-value" class="stat-value">100%</span>
+            </div>
+            <div class="stat">
+                <span class="stat-label">😊 Happiness</span>
+                <div class="stat-bar">
+                    <div id="happiness-bar" class="stat-fill happiness"></div>
+                </div>
+                <span id="happiness-value" class="stat-value">100%</span>
+            </div>
+            <div class="stat">
+                <span class="stat-label">⚡ Energy</span>
+                <div class="stat-bar">
+                    <div id="energy-bar" class="stat-fill energy"></div>
+                </div>
+                <span id="energy-value" class="stat-value">100%</span>
+            </div>
+        </div>
+
+        <div class="actions-container">
+            <button id="feed-btn" class="action-btn feed">
+                🍖 Feed
+            </button>
+            <button id="play-btn" class="action-btn play">
+                🎾 Play
+            </button>
+            <button id="sleep-btn" class="action-btn sleep">
+                😴 Sleep
+            </button>
+            <button id="pet-btn" class="action-btn pet">
+                🤚 Pet
+            </button>
+        </div>
+
+        <div class="info-section">
+            <p>Take care of your virtual dog! Keep them fed, happy, and well-rested.</p>
+            <p class="tip">💡 Tip: Stats decrease over time, so check back often!</p>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

@@ -1,0 +1,398 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.game-container {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    max-width: 450px;
+    width: 100%;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 10px;
+    font-size: 2rem;
+}
+
+.dog-name-section {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#dog-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #764ba2;
+}
+
+.small-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 5px;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.small-btn:hover {
+    opacity: 1;
+}
+
+.dog-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    min-height: 180px;
+}
+
+/* CSS Dog */
+.dog {
+    position: relative;
+    width: 120px;
+    height: 140px;
+    transition: transform 0.3s ease;
+}
+
+.dog.happy {
+    animation: bounce 0.5s ease infinite;
+}
+
+.dog.sleeping {
+    opacity: 0.7;
+}
+
+.dog.eating {
+    animation: eat 0.3s ease infinite;
+}
+
+.dog.playing {
+    animation: play 0.4s ease infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes eat {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(-5deg); }
+}
+
+@keyframes play {
+    0%, 100% { transform: rotate(-5deg); }
+    50% { transform: rotate(5deg); }
+}
+
+.dog-body {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.dog-ear {
+    position: absolute;
+    width: 25px;
+    height: 35px;
+    background: #8B4513;
+    border-radius: 50% 50% 0 0;
+    top: 0;
+}
+
+.dog-ear.left {
+    left: 15px;
+    transform: rotate(-15deg);
+}
+
+.dog-ear.right {
+    right: 15px;
+    transform: rotate(15deg);
+}
+
+.dog-head {
+    position: absolute;
+    width: 80px;
+    height: 70px;
+    background: #D2691E;
+    border-radius: 50%;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.dog-eye {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: #333;
+    border-radius: 50%;
+    top: 20px;
+}
+
+.dog-eye.left {
+    left: 18px;
+}
+
+.dog-eye.right {
+    right: 18px;
+}
+
+.dog.sleeping .dog-eye {
+    height: 3px;
+    top: 25px;
+    border-radius: 0;
+}
+
+.dog-nose {
+    position: absolute;
+    width: 15px;
+    height: 10px;
+    background: #333;
+    border-radius: 50%;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.dog-tongue {
+    position: absolute;
+    width: 12px;
+    height: 0;
+    background: #FF69B4;
+    border-radius: 0 0 50% 50%;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: height 0.3s ease;
+}
+
+.dog-tongue.visible {
+    height: 15px;
+}
+
+.dog-torso {
+    position: absolute;
+    width: 70px;
+    height: 50px;
+    background: #D2691E;
+    border-radius: 30px;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.dog-tail {
+    position: absolute;
+    width: 8px;
+    height: 30px;
+    background: #8B4513;
+    border-radius: 10px;
+    top: 75px;
+    right: 10px;
+    transform-origin: bottom center;
+    transform: rotate(-30deg);
+    transition: transform 0.1s ease;
+}
+
+.dog-tail.wagging {
+    animation: wag 0.2s ease infinite alternate;
+}
+
+@keyframes wag {
+    0% { transform: rotate(-45deg); }
+    100% { transform: rotate(15deg); }
+}
+
+.dog-legs {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.dog-leg {
+    position: absolute;
+    width: 12px;
+    height: 25px;
+    background: #D2691E;
+    border-radius: 0 0 8px 8px;
+    bottom: 0;
+}
+
+.dog-leg.front-left {
+    left: 30px;
+}
+
+.dog-leg.front-right {
+    left: 48px;
+}
+
+.dog-leg.back-left {
+    right: 48px;
+}
+
+.dog-leg.back-right {
+    right: 30px;
+}
+
+.status-message {
+    margin-top: 10px;
+    font-size: 1rem;
+    color: #666;
+    height: 24px;
+    text-align: center;
+}
+
+.stats-container {
+    margin-bottom: 20px;
+}
+
+.stat {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    gap: 10px;
+}
+
+.stat-label {
+    width: 100px;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.stat-bar {
+    flex: 1;
+    height: 20px;
+    background: #e0e0e0;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.stat-fill {
+    height: 100%;
+    border-radius: 10px;
+    transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+.stat-fill.hunger {
+    background: linear-gradient(90deg, #ff6b6b, #ee5a5a);
+}
+
+.stat-fill.happiness {
+    background: linear-gradient(90deg, #feca57, #ff9f43);
+}
+
+.stat-fill.energy {
+    background: linear-gradient(90deg, #48dbfb, #0abde3);
+}
+
+.stat-value {
+    width: 45px;
+    font-size: 0.85rem;
+    color: #777;
+    text-align: right;
+}
+
+.actions-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.action-btn {
+    padding: 15px 20px;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.action-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.action-btn:active {
+    transform: translateY(0);
+}
+
+.action-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.action-btn.feed {
+    background: linear-gradient(135deg, #ff6b6b, #ee5a5a);
+    color: white;
+}
+
+.action-btn.play {
+    background: linear-gradient(135deg, #feca57, #ff9f43);
+    color: white;
+}
+
+.action-btn.sleep {
+    background: linear-gradient(135deg, #48dbfb, #0abde3);
+    color: white;
+}
+
+.action-btn.pet {
+    background: linear-gradient(135deg, #ff9ff3, #f368e0);
+    color: white;
+}
+
+.info-section {
+    text-align: center;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 10px;
+}
+
+.info-section p {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+}
+
+.info-section .tip {
+    color: #999;
+    font-size: 0.8rem;
+    margin-bottom: 0;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .game-container {
+        padding: 20px;
+    }
+    
+    h1 {
+        font-size: 1.5rem;
+    }
+    
+    .action-btn {
+        padding: 12px 15px;
+        font-size: 0.9rem;
+    }
+}
